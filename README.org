@@ -1,6 +1,8 @@
 * emacs-package-checker
 [[https://github.com/akirak/emacs-package-checker/workflows/CI/badge.svg?branch=v1][https://github.com/akirak/emacs-package-checker/workflows/CI/badge.svg?branch=v1]]
 
+*This =v2= branch is currently under experiments. [[https://github.com/akirak/emacs-package-checker/tree/v1][v1]] branch is considered stable, so please use it for production.*
+
 Emacs Package Checker lets you quickly configure typical linters (i.e. package-lint, byte-compile, and checkdoc) for your Emacs package.
 
 There are existing solutions in this field like [[https://github.com/vermiculus/emake.el][emake.el]] and [[https://gitlab.petton.fr/DamienCassou/makel][makel]]. 
