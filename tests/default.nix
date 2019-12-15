@@ -6,9 +6,9 @@ let
 in check-package {
   inherit emacs pkgs;
   name = "emacs-package-checker-hello";
-  src = ./.;
-  targetFiles = ["hello.el"];
-  emacsPackages = epkgs: (with epkgs.melpaStablePackages; [
+  sourceDir = ./.;
+  sourceFiles = ["hello.el"];
+  dependencies = epkgs: (with epkgs.melpaStablePackages; [
     dash
   ]);
 }

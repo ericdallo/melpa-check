@@ -4,7 +4,7 @@ let
 in check-package {
   inherit emacs pkgs;
   name = "emacs-package-checker-bad-hello";
-  src = ./.;
-  targetFiles = ["bad-hello.el"];
-  emacsPackages = epkgs: [];
+  sourceDir = ./.;
+  sourceFiles = ["bad-hello.el"];
+  dependencies = epkgs: [];
 }
