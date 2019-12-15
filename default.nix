@@ -2,13 +2,13 @@
   system ? builtins.currentSystem,
   name ? "awesome-emacs-package",
   emacs ? pkgs.emacs,
-  emacsPackages, src, targetFiles
+  dependencies, sourceDir, sourceFiles
 }:
 let
   # Emacs with packages specified as dependencies from outside of this
   # nix file. This is used for byte-compiling the package.
   emacsWithPackages = (pkgs.emacsPackagesNgGen emacs).emacsWithPackages
-    emacsPackages;
+    dependencies;
   # Emacs with package-lint. This is used for running package-lint.
   emacsForPackageLint = (pkgs.emacsPackagesNgGen emacs).emacsWithPackages
     (epkgs: (with epkgs.melpaStablePackages; [ package-lint ]));
@@ -24,7 +24,9 @@ in rec
 {
 
   byte-compile = derivation {
-    inherit src targetFiles system;
+    inherit system;
+    targetFiles = sourceFiles
+    src = sourceDir
     name = name + "-byte-compile";
     builder = "${pkgs.bash}/bin/bash";
     args = [ ./byte-compile.sh ];
@@ -32,7 +34,9 @@ in rec
   };
 
   checkdoc = derivation {
-    inherit src targetFiles system;
+    inherit system;
+    targetFiles = sourceFiles
+    src = sourceDir
     name = name + "-checkdoc";
     builder = "${pkgs.bash}/bin/bash";
     args = [ ./checkdoc.sh ];
@@ -45,10 +49,12 @@ in rec
   package-lint = pkgs.stdenv.mkDerivation {
     name = name + "-package-lint";
     buildInputs = [ emacsForPackageLint ];
+    targetFiles = sourceFiles
+   src = sourceDir
     shellHook =
     let
-    # Assume the items of targetFiles never contain space
-      args = pkgs.lib.foldr (a: b: a + " " + b) "" targetFiles;
+      # Assume the items of sourceFiles never contain space
+      args = pkgs.lib.foldr (a: b: a + " " + b) "" sourceFiles;
     in ''
     set -e
     cd ${src}
