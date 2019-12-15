@@ -1,0 +1,11 @@
+-- -*- mode: dhall -*-
+[ {
+    name = "hello"
+  , sourceFiles = ["hello.el"]
+  , dependencies = ["dash"]
+  }
+  , { name = "bad-hello"
+  , sourceFiles = ["bad-hello.el"]
+  , dependencies = []
+  }
+]
