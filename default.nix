@@ -57,7 +57,7 @@ in rec
       args = pkgs.lib.foldr (a: b: a + " " + b) "" sourceFiles;
     in ''
     set -e
-    cd ${src}
+    cd ${sourceDir}
     ELPA_USER_DIR=${elpaCache} emacs --no-site-file --batch -l ${./run-package-lint.el} ${args}
     echo "package-lint is OK."
     # Prevent from actually entering the shell
