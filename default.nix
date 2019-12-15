@@ -25,8 +25,8 @@ in rec
 
   byte-compile = derivation {
     inherit system;
-    targetFiles = sourceFiles
-    src = sourceDir
+    targetFiles = sourceFiles;
+    src = sourceDir;
     name = name + "-byte-compile";
     builder = "${pkgs.bash}/bin/bash";
     args = [ ./byte-compile.sh ];
@@ -35,8 +35,8 @@ in rec
 
   checkdoc = derivation {
     inherit system;
-    targetFiles = sourceFiles
-    src = sourceDir
+    targetFiles = sourceFiles;
+    src = sourceDir;
     name = name + "-checkdoc";
     builder = "${pkgs.bash}/bin/bash";
     args = [ ./checkdoc.sh ];
@@ -49,8 +49,8 @@ in rec
   package-lint = pkgs.stdenv.mkDerivation {
     name = name + "-package-lint";
     buildInputs = [ emacsForPackageLint ];
-    targetFiles = sourceFiles
-   src = sourceDir
+    targetFiles = sourceFiles;
+    src = sourceDir;
     shellHook =
     let
       # Assume the items of sourceFiles never contain space
