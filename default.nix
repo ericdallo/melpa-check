@@ -59,4 +59,13 @@ in rec
     '';
   };
 
+  # Like package-lint, this requires internet connection, so run it in nix-shell.
+  all = pkgs.stdenv.mkDerivation {
+    name = name + "-all";
+    buildInputs = [ byte-compile checkdoc package-lint ];
+    shellHook = ''
+    echo "All tests have passed."
+    '';
+  };
+
 }

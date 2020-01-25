@@ -26,7 +26,10 @@ rm -rf result
 
 nix-shell -A package-lint
 
+nix-shell -A all
+
 # The following commands are expected to fail.
 ! nix-build -A byte-compile bad-hello.nix
 ! nix-build -A checkdoc bad-hello.nix
 ! nix-shell -A package-lint bad-hello.nix
+! nix-shell -A all bad-hello.nix
